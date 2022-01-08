@@ -5,4 +5,4 @@ Sirve para calcular el total de un listado de compras.
 
 ## Verión web
 
-En el siguiente enlace la versión web [Live](https://github.com/felcadev).
+En el siguiente enlace la versión web [link](https://felcadev.github.io/carritodecompras/).

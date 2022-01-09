@@ -3,6 +3,7 @@ import ListItems from './components/ListItems';
 import Modal from './components/Modal';
 import NewItem from './components/NewItem';
 import Summary from './components/Summary';
+import { exportToCSV } from './helpers/exelHelper';
 
 
 const KEY = 'productos';
@@ -30,6 +31,12 @@ const App = () => {
     setProductos([]);
   }
 
+  const handleDownloadExcel = () => {
+    if(productos.length < 1) return;
+    let dataToExcel = productos.map( ({name, price, count}) => ({Nombre: name,Precio :  price, Cantidad: count, Total: count * price}));
+    exportToCSV(dataToExcel, 'CarritoDeCompras');
+  }
+
   return (
     <div className='container'>
       <div className='card'>
@@ -42,6 +49,7 @@ const App = () => {
         </div>
         <div className='card-body'>
           <button className='btn btn-danger' data-toggle="modal" data-target="#exampleModal">Limpiar data</button>
+          <button className='btn btn-success' onClick={handleDownloadExcel}>Descargar excel</button>
           <h2>Listado de productos</h2>
           <ListItems productos={productos} setProductos={setProductos} />
         </div>

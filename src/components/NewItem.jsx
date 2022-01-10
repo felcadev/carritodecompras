@@ -19,12 +19,12 @@ export default function NewItem({ setProductos }) {
     }
     const handleInputCountChange = (e) => {
         let newInputValue = { ...inputValue };
-        newInputValue.count = e.target.value;
+        newInputValue.count = parseInt(e.target.value);
         setInputValue(newInputValue);
     }
     const handleInputPriceChange = (e) => {
         let newInputValue = { ...inputValue };
-        newInputValue.price = e.target.value;
+        newInputValue.price = parseInt(e.target.value);
         setInputValue(newInputValue);
     }
 

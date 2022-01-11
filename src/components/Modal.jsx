@@ -16,7 +16,7 @@ export default function Modal({title, bodyText, handleEvent}) {
                             {bodyText}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-success" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-success" data-dismiss="modal">Cerrar</button>
                             <button type="button" className="btn btn-danger" onClick={handleEvent} data-dismiss="modal">Eliminar</button>
                         </div>
                     </div>

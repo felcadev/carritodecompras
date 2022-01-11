@@ -40,26 +40,49 @@ export default function NewItem({ setProductos }) {
         setInputValue(defaultInputs);
     }
 
+    const handleReset = (e) => {
+        e.preventDefault();
+        setInputValue(defaultInputs);
+    }
+
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Producto</h2>
-            <div className="form-group">
-                <label>Nombre</label>
-                <input type="text" className="form-control" placeholder="Ingrese nombre del producto" value={inputValue.name} onChange={handleInputNameChange} required />
+
+        <div className="card">
+            <div className="card-header">
+                <h3>Producto</h3>
             </div>
-            <div className="form-group">
-                <label>Cantidad</label>
-                <input type="number" className="form-control" placeholder="Ingrese cantidad del producto" value={inputValue.count} onChange={handleInputCountChange} required min={1} />
+            <div className="card-body">
+                <form onSubmit={handleSubmit}>
+
+                    <div className="form-group">
+                        <label>Nombre</label>
+                        <input type="text" className="form-control" placeholder="Ingrese nombre del producto" value={inputValue.name} onChange={handleInputNameChange} required />
+                    </div>
+
+                    <div className="row">
+                        <div className="form-group col-5">
+                            <label>Cantidad</label>
+                            <input type="number" className="form-control" placeholder="Ingrese cantidad del producto" value={inputValue.count} onChange={handleInputCountChange} required min={1} />
+                        </div>
+                        <div className="form-group col-7">
+                            <label>Precio</label>
+                            <input type="number" className="form-control" placeholder="Ingrese precio del producto" value={inputValue.price} onChange={handleInputPriceChange} required min={1} />
+                        </div>
+                    </div>
+
+                    <div className='d-flex justify-content-center '>
+                        <button type="submit" className="btn btn-primary">Guardar</button>
+                        <button onClick={handleReset} className="btn btn-danger ml-2">Limpiar</button>
+                    </div>
+
+                </form>
+
             </div>
-            <div className="form-group">
-                <label>Precio</label>
-                <input type="number" className="form-control" placeholder="Ingrese precio del producto" value={inputValue.price} onChange={handleInputPriceChange} required min={1} />
-            </div>
-            <div className='text-center'>
-                <button type="submit" className="btn btn-primary">Guardar</button>
-            </div>
-        </form>
+
+        </div>
+
+
 
     )
 }

@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { currencyFormat } from '../helpers/currencyHelper';
 
-export default function Summary({productos}) {
-
-    const [total, setTotal] = useState(0);
-
-
-    useEffect(() => {
-        let sum = 0
-        productos.forEach(p => sum += p.count * p.price);
-        setTotal(sum);
-    }, [productos])
+export default function Summary({total}) {
 
     return (
-        <>
-            <h1 className="card-title text-center">Total : {currencyFormat(total)}</h1>
-            {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
-        </>
+        <div className='text-center mt-2 mb-2'>
+            <hr />
+            <h2>Total : {currencyFormat(total)}</h2>
+            <hr />
+        </div>
     )
 }

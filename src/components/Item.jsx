@@ -11,8 +11,8 @@ export default function Item({ id, name, count, price, deleteProducto }) {
         <li className="list-group-item d-flex justify-content-between align-items-center">
             {name}
             <div>
-                <span className="badge badge-primary badge-pill">{count} x {currencyFormat(parseInt(price))} = {currencyFormat(price * count)}</span>
-                <button className='badge badge-danger' onClick={handleDelete}>X</button>
+                <div className='btn btn-primary btn-sm'>{count} x {currencyFormat(parseInt(price))} = {currencyFormat(price * count)}</div>
+                <button className='btn btn-danger btn-sm ml-2' onClick={handleDelete}>X</button>
             </div>
         </li>
     )

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { generateID } from '../helpers/idGenerator';
+import useForm from '../hooks/useForm';
 
 export default function NewItem({ setProductos }) {
 
@@ -9,40 +10,23 @@ export default function NewItem({ setProductos }) {
         price: 0
     };
 
-    const [inputValue, setInputValue] = useState(defaultInputs);
+    const [ inputValue, handleFormChange, handleResetForm ] = useForm(defaultInputs);
+    const { name, count, price } = inputValue;
 
-    const handleInputNameChange = (e) => {
-        let newInputValue = { ...inputValue };
-        newInputValue.name = e.target.value;
-        setInputValue(newInputValue);
-
-    }
-    const handleInputCountChange = (e) => {
-        let newInputValue = { ...inputValue };
-        newInputValue.count = parseInt(e.target.value);
-        setInputValue(newInputValue);
-    }
-    const handleInputPriceChange = (e) => {
-        let newInputValue = { ...inputValue };
-        newInputValue.price = parseInt(e.target.value);
-        setInputValue(newInputValue);
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
         if (!inputValue.name && inputValue.count < 1 && inputValue.price < 1) return;
-
 
         let id = generateID();
         setProductos(p => [{ ...inputValue, id: id }, ...p]);
-        setInputValue(defaultInputs);
+        handleResetForm();
     }
 
     const handleReset = (e) => {
         e.preventDefault();
-        setInputValue(defaultInputs);
+        handleResetForm();
     }
 
 
@@ -57,17 +41,17 @@ export default function NewItem({ setProductos }) {
 
                     <div className="form-group">
                         <label>Nombre</label>
-                        <input type="text" className="form-control" placeholder="Ingrese nombre del producto" value={inputValue.name} onChange={handleInputNameChange} required />
+                        <input type="text" className="form-control" name='name' autoFocus={true} placeholder="Ingrese nombre del producto" value={name} onChange={handleFormChange} required />
                     </div>
 
                     <div className="row">
                         <div className="form-group col-5">
                             <label>Cantidad</label>
-                            <input type="number" className="form-control" placeholder="Ingrese cantidad del producto" value={inputValue.count} onChange={handleInputCountChange} required min={1} />
+                            <input type="number" className="form-control" name='count' placeholder="Ingrese cantidad del producto" value={count} onChange={handleFormChange} required min={1} />
                         </div>
                         <div className="form-group col-7">
                             <label>Precio</label>
-                            <input type="number" className="form-control" placeholder="Ingrese precio del producto" value={inputValue.price} onChange={handleInputPriceChange} required min={1} />
+                            <input type="number" className="form-control" name='price' placeholder="Ingrese precio del producto" value={price} onChange={handleFormChange} required min={1} />
                         </div>
                     </div>
 

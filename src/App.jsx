@@ -41,7 +41,7 @@ const App = () => {
 
   const handleDownloadExcel = () => {
     if (productos.length < 1) return;
-    let dataToExcel = productos.map(({ name, price, count }) => ({ Nombre: name, Precio: price, Cantidad: count, Total: count * price }));
+    let dataToExcel = productos.map(({ name, price, count }) => ({ Nombre: name, Precio: parseInt(price), Cantidad: parseInt(count), Total: count * price }));
     dataToExcel  = [...dataToExcel, { Cantidad: 'Total', Total: total}]
     exportToCSV(dataToExcel, 'CarritoDeCompras');
   }

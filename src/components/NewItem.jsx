@@ -22,6 +22,7 @@ export default function NewItem({ setProductos }) {
         let id = generateID();
         setProductos(p => [{ ...inputValue, id: id }, ...p]);
         handleResetForm();
+        document.querySelector('#name').select();
     }
 
     const handleReset = (e) => {
@@ -41,17 +42,44 @@ export default function NewItem({ setProductos }) {
 
                     <div className="form-group">
                         <label>Nombre</label>
-                        <input type="text" className="form-control" name='name' autoFocus={true} placeholder="Ingrese nombre del producto" value={name} onChange={handleFormChange} required />
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name='name'
+                            id='name'
+                            autoFocus={true} 
+                            placeholder="Ingrese nombre del producto" 
+                            value={name} 
+                            onChange={handleFormChange} 
+                            required 
+                        />
                     </div>
 
                     <div className="row">
                         <div className="form-group col-5">
                             <label>Cantidad</label>
-                            <input type="number" className="form-control" name='count' placeholder="Ingrese cantidad del producto" value={count} onChange={handleFormChange} required min={1} />
+                            <input 
+                                type="number" 
+                                className="form-control" 
+                                name='count' 
+                                placeholder="Ingrese cantidad del producto" 
+                                value={count} onChange={handleFormChange} 
+                                required 
+                                min={1} 
+                            />
                         </div>
                         <div className="form-group col-7">
                             <label>Precio</label>
-                            <input type="number" className="form-control" name='price' placeholder="Ingrese precio del producto" value={price} onChange={handleFormChange} required min={1} />
+                            <input 
+                                type="number" 
+                                className="form-control" 
+                                name='price' 
+                                placeholder="Ingrese precio del producto" 
+                                value={price}
+                                onChange={handleFormChange} 
+                                required 
+                                min={1}
+                            />
                         </div>
                     </div>
 

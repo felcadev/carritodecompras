@@ -1,7 +1,8 @@
 import React from 'react'
 import { currencyFormat } from '../helpers/currencyHelper';
 
-export default function Item({ id, name, count, price, deleteProducto }) {
+
+const Item = React.memo(({ id, name, count, price, deleteProducto }) => {
 
     const handleDelete = () => {
         deleteProducto(id);
@@ -16,4 +17,6 @@ export default function Item({ id, name, count, price, deleteProducto }) {
             </div>
         </li>
     )
-}
+})
+
+export default Item;

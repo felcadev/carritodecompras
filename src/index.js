@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+// import App from './App';
+import { RouterApp } from './RouterApp';
 
 ReactDOM.render(
-  <App />,
+  <>
+    <RouterApp />
+  </>,
   document.getElementById('root')
 );
 

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import React from 'react'
 import { generateID } from '../helpers/idGenerator';
 import useForm from '../hooks/useForm';
 
-export default function NewItem({ setProductos }) {
+const NewItem = React.memo(({ setProductos }) => {
 
     const defaultInputs = {
         name: '',
@@ -10,7 +12,7 @@ export default function NewItem({ setProductos }) {
         price: 0
     };
 
-    const [ inputValue, handleFormChange, handleResetForm ] = useForm(defaultInputs);
+    const [inputValue, handleFormChange, handleResetForm] = useForm(defaultInputs);
     const { name, count, price } = inputValue;
 
 
@@ -32,69 +34,78 @@ export default function NewItem({ setProductos }) {
 
 
     return (
+        <>
 
-        <div className="card">
-            <div className="card-header">
-                <h3>Producto</h3>
-            </div>
-            <div className="card-body">
-                <form onSubmit={handleSubmit}>
+            <Card>
+                <CardContent>
+                    <Box
+                        component="form"
+                        autoComplete="off"
+                    >
+                        <Grid container>
+                            <Typography variant="h5" component="h2" mb={3}>
+                                Nuevo Producto
+                            </Typography>
 
-                    <div className="form-group">
-                        <label>Nombre</label>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            name='name'
-                            id='name'
-                            autoFocus={true} 
-                            placeholder="Ingrese nombre del producto" 
-                            value={name} 
-                            onChange={handleFormChange} 
-                            required 
-                        />
-                    </div>
-
-                    <div className="row">
-                        <div className="form-group col-5">
-                            <label>Cantidad</label>
-                            <input 
-                                type="number" 
-                                className="form-control" 
-                                name='count' 
-                                placeholder="Ingrese cantidad del producto" 
-                                value={count} onChange={handleFormChange} 
-                                required 
-                                min={1} 
+                            <TextField
+                                required
+                                id="name"
+                                name='name'
+                                label="Nombre"
+                                value={name}
+                                fullWidth={true}
+                                autoFocus={true}
+                                placeholder="Ingrese nombre del producto"
+                                onChange={handleFormChange}
                             />
-                        </div>
-                        <div className="form-group col-7">
-                            <label>Precio</label>
-                            <input 
-                                type="number" 
-                                className="form-control" 
-                                name='price' 
-                                placeholder="Ingrese precio del producto" 
-                                value={price}
-                                onChange={handleFormChange} 
-                                required 
-                                min={1}
-                            />
-                        </div>
-                    </div>
+                            <Grid container direction="row" spacing={1} pt={3} pb={3}>
+                                <Grid item xs={4}>
+                                    <TextField
+                                        required
+                                        id="outlined-required"
+                                        label="Cantidad"
+                                        type='number'
+                                        fullWidth={true}
+                                        className="form-control"
+                                        name='count'
+                                        placeholder="Ingrese cantidad del producto"
+                                        value={count}
+                                        onChange={handleFormChange}
+                                        InputProps={{ inputProps: { min: 0 } }}
+                                        />
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <TextField
+                                        required
+                                        id="outlined-required"
+                                        label="Precio"
+                                        type='number'
+                                        fullWidth={true}
+                                        className="form-control" 
+                                        name='price' 
+                                        placeholder="Ingrese precio del producto" 
+                                        value={price}
+                                        onChange={handleFormChange} 
+                                        InputProps={{ inputProps: { min: 0 } }}
+                                        />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Box textAlign='center'>
+                            <Button variant='contained' onClick={handleSubmit}>
+                                Guardar
+                            </Button>
+                            <Button variant='contained' color='error' onClick={handleReset}>
+                                Limpiar
+                            </Button>
+                        </Box>
+                    </Box>
+                </CardContent>
+            </Card>
 
-                    <div className='d-flex justify-content-center '>
-                        <button type="submit" className="btn btn-primary">Guardar</button>
-                        <button onClick={handleReset} className="btn btn-danger ml-2">Limpiar</button>
-                    </div>
-
-                </form>
-
-            </div>
-
-        </div>
-
-
-
+        </>
     )
-}
+})
+
+
+export default NewItem;

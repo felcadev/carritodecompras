@@ -1,13 +1,49 @@
 import React from 'react'
 import { currencyFormat } from '../helpers/currencyHelper';
+import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-export default function Summary({total}) {
+const Summary = React.memo(({total}) => {
 
     return (
-        <div className='text-center mt-2 mb-2'>
-            <hr />
-            <h2>Total : {currencyFormat(total)}</h2>
-            <hr />
-        </div>
+        <Card >
+        <CardContent>
+          <Grid
+            container
+            spacing={3}
+            sx={{ justifyContent: 'center' }}
+          >
+            <Grid item>
+              <Typography
+                color="textSecondary"
+                gutterBottom
+                variant="overline"
+              >
+                SUMA TOTAL
+              </Typography>
+              <Typography
+                color="textPrimary"
+                variant="h4"
+              >
+                {currencyFormat(total)}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Avatar
+                sx={{
+                  backgroundColor: 'primary.main',
+                  height: 56,
+                  width: 56
+                }}
+              >
+                <AttachMoneyIcon  />
+              </Avatar>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
     )
-}
+})
+
+
+export default Summary;

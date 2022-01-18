@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Carrito para el super
 
 Este proyecto fue creado para aprender las bases de react.
 Sirve para calcular el total de un listado de compras.

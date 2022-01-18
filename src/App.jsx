@@ -1,3 +1,4 @@
+import { Box, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import ListItems from './components/ListItems';
 import Modal from './components/Modal';
@@ -8,7 +9,7 @@ import { exportToCSV } from './helpers/excelHelper';
 
 const KEY = 'productos';
 
-const App = () => {
+const App = React.memo(() => {
 
   const [productos, setProductos] = useState([]);
   const [total, setTotal] = useState(0);
@@ -29,7 +30,7 @@ const App = () => {
     let sum = 0
     productos.forEach(p => sum += p.count * p.price);
     setTotal(sum);
-}, [productos])
+  }, [productos])
 
   useEffect(() => {
     localStorage.setItem(KEY, JSON.stringify(productos));
@@ -42,26 +43,36 @@ const App = () => {
   const handleDownloadExcel = () => {
     if (productos.length < 1) return;
     let dataToExcel = productos.map(({ name, price, count }) => ({ Nombre: name, Precio: parseInt(price), Cantidad: parseInt(count), Total: count * price }));
-    dataToExcel  = [...dataToExcel, { Cantidad: 'Total', Total: total}]
+    dataToExcel = [...dataToExcel, { Cantidad: 'Total', Total: total }]
     exportToCSV(dataToExcel, 'CarritoDeCompras');
   }
 
   return (
-    <div className='container mt-3'>
+    // <div className='container'>
+    //   {/* <NewItem setProductos={setProductos} /> */}
+
+    //   <Summary total={total} />
+    //   <Divider />
+    //   <ListItems productos={productos} setProductos={setProductos} handleExcel={handleDownloadExcel} handleCleanData={handleCleanData} />
+
+    // </div>
+
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        borderRadius: 1,
+      }}
+    >
       <NewItem setProductos={setProductos} />
-
+      <Divider />
       <Summary total={total} />
+      <Divider />
+      <ListItems productos={productos} setProductos={setProductos} handleExcel={handleDownloadExcel} handleCleanData={handleCleanData} />
 
-      <div className='d-flex justify-content-around mb-4'>
-        <button className='btn btn-danger' data-toggle="modal" data-target="#exampleModal">Eliminar Info</button>
-        <button className='btn btn-success' onClick={handleDownloadExcel}>Descargar excel</button>
-      </div>
-
-      <ListItems productos={productos} setProductos={setProductos} />
-
-      <Modal title={titleModal} bodyText={bodyModal} handleEvent={handleCleanData} />
-    </div>
+    </Box>
   );
-}
+})
 
 export default App;
